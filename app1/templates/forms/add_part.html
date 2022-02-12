@@ -1,0 +1,38 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+    <h1 class="display-1 text-center p-5">Add Part</h1>
+    <form action="/add_new_part/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="sparepartnumber">Spare Parts Number</label>
+            <input type="text" class="form-control" id="sparepartnumber" name="sparepartnumber">
+        </div>
+        <div class="form-group">
+            <label for="name">Spare Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" name="description">
+        </div>
+        <div class="form-group">
+            <label for="photo">Photo</label>
+            <input type="text" class="form-control" id="photo" name="photo">
+        </div>
+        <div class="form-group">
+            <label for="unit">Unit</label>
+            <input type="text" class="form-control" id="unit" name="unit">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="stockquantity">Stock Quantity</label>
+            <input type="text" class="form-control" id="stockquantity" name="stockquantity">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit
+        </button>
+    </form>
+
+{% endblock %}
