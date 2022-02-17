@@ -10,7 +10,8 @@ from app1.models import *
 # Create your views here.
 
 def index(request):
-    return render(request, "home/index.html", {"title":"Explore Bikes"})
+    return render(request, "home/index.html", {"title": "Explore Bikes"})
+
 
 # Headers
 
@@ -235,19 +236,18 @@ def book_service(request):
     return render(request, 'booking/book_service.html', {"title": "book_service", "data": data})
 
 
-
-# def book_vehicle_now(request, id):
-#     veh_data = tbl_vehicle_model.objects.get(id=id)
-#     data = tbl_booking()
-#     data.vehicle_model_number = veh_data.name
-#     data.customer_id = request.session['uid']
-#     data.booking_id = "na"
-#     data.booking_date = datetime.datetime.now().strftime("%Y-%m-%d")
-#     data.status = "pending"
-#     data.save()
-#     data.booking_id = "booking" + str(data.id)
-#     data.save()
-#     return redirect('/customer_home')
+def book_service_now(request, id):
+    data = tbl_book_service()
+    sdata = tbl_service.objects.get(id=id)
+    data.serviceID = sdata.id
+    data.customerID = request.session['uid']
+    data.serviceName = sdata.servicename
+    data.serviceID = "na"
+    data.status = "pending"
+    data.serviceDate = datetime.datetime.now().strftime("%Y-%m-%d")
+    data.save()
+    data.serviceID = "EBService" + str(data.id)
+    return redirect('/book_service')
 
 
 ##############

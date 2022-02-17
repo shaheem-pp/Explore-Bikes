@@ -106,6 +106,7 @@ urlpatterns = [
     path('book_vehicle/<int:id>', views.book_vehicle),
     path('book_vehicle_now/<int:id>', views.book_vehicle_now),
     path('book_service/', views.book_service),
+    path('book_service_now/<int:id>', views.book_service_now),
 
     path('customer_logout/', views.customer_logout)
 ]

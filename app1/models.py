@@ -43,8 +43,6 @@ class tbl_booking(models.Model):
         db_table = "tbl_booking"
 
 
-
-
 class tbl_sales(models.Model):
     sales_no = models.CharField(max_length=30)
     customerID = models.CharField(max_length=30)
@@ -71,6 +69,18 @@ class tbl_service(models.Model):
 
     class Meta:
         db_table = "tbl_service"
+
+
+class tbl_book_service(models.Model):
+    bookingID = models.CharField(max_length=10)
+    customerID = models.CharField(max_length=10)
+    serviceID = models.CharField(max_length=10)
+    serviceName = models.CharField(max_length=10)
+    serviceDate = models.CharField(max_length=10)
+    status = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "tbl_book_service"
 
 
 class tbl_reviews(models.Model):
