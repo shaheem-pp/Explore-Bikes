@@ -1,0 +1,13 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+
+
+    <div class="m-5">
+    {% for services in data %}
+        <a href="/book_service_now/{{ services.id }}">
+            <h1 class="display-4 text-center">{{ services.servicename }}</h1>
+        </a>
+    {% endfor %}
+    </div>
+
+{% endblock %}

@@ -3,8 +3,9 @@ from django.db import models
 
 # Create your models here.
 
+
 class tbl_staff(models.Model):
-    Staffid = models.CharField(max_length=30)
+    staffID = models.CharField(max_length=30)
     Name = models.CharField(max_length=40)
     Address = models.CharField(max_length=30)
     Phone = models.CharField(max_length=30)
@@ -31,6 +32,26 @@ class tbl_vehicle_model(models.Model):
         db_table = "tbl_vehicle_model"
 
 
+class tbl_booking(models.Model):
+    vehicle_model_number = models.CharField(max_length=30)
+    customer_id = models.CharField(max_length=30)
+    booking_id = models.CharField(max_length=30)
+    booking_date = models.CharField(max_length=30)
+    status = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "tbl_booking"
+
+
+
+
+class tbl_sales(models.Model):
+    sales_no = models.CharField(max_length=30)
+    customerID = models.CharField(max_length=30)
+    vehicle_number = models.CharField(max_length=30)
+    model_no = models.CharField(max_length=30)
+
+
 class tbl_spare_parts(models.Model):
     sparepartnumber = models.CharField(max_length=30)
     name = models.CharField(max_length=40)
@@ -45,7 +66,7 @@ class tbl_spare_parts(models.Model):
 
 
 class tbl_service(models.Model):
-    serviceid = models.CharField(max_length=30)
+    serviceID = models.CharField(max_length=30)
     servicename = models.CharField(max_length=40)
 
     class Meta:
@@ -53,8 +74,8 @@ class tbl_service(models.Model):
 
 
 class tbl_reviews(models.Model):
-    reviewid = models.CharField(max_length=30)
-    customerName = models.CharField(max_length=40)
+    reviewID = models.CharField(max_length=30)
+    customerID = models.CharField(max_length=40)
     review = models.CharField(max_length=30)
     reviewdate = models.CharField(max_length=30)
 
@@ -63,8 +84,8 @@ class tbl_reviews(models.Model):
 
 
 class tbl_complaints(models.Model):
-    complaintid = models.CharField(max_length=30)
-    customerName = models.CharField(max_length=40)
+    complaintID = models.CharField(max_length=30)
+    customerID = models.CharField(max_length=40)
     complaint = models.CharField(max_length=30)
     complaintDate = models.CharField(max_length=30)
 
@@ -93,13 +114,3 @@ class tbl_login(models.Model):
 
     class Meta:
         db_table = "tbl_login"
-
-
-class tbl_vehicle_booking(models.Model):
-    vehicle_model_number = models.CharField(max_length=30)
-    customer_id = models.CharField(max_length=30)
-    booking_date = models.CharField(max_length=30)
-    status = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = "tbl_vehicle_customer"

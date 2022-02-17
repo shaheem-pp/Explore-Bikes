@@ -5,12 +5,7 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="servicename">Service Type</label>
-            <select id="servicename" name="servicename" class="form-control">
-                <option value="General">General</option>
-                <option value="First Service">First Service</option>
-                <option value="First Service">Second Service</option>
-                <option value="First Service">Third Service</option>
-            </select>
+            <input id="servicename" name="servicename" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Submit
         </button>

@@ -21,6 +21,8 @@ from app1 import views
 
 urlpatterns = [
 
+    path('', views.index),
+
     ################################################# HEADER #################################################
 
     path('admin/', views.admin),
@@ -101,7 +103,11 @@ urlpatterns = [
     path('service_home/', views.service_home),
 
     path('view_model_page/', views.view_model_page),
-    path('book_vehicle/<int:id>', views.book_vehicle)
+    path('book_vehicle/<int:id>', views.book_vehicle),
+    path('book_vehicle_now/<int:id>', views.book_vehicle_now),
+    path('book_service/', views.book_service),
+
+    path('customer_logout/', views.customer_logout)
 ]
 
 if settings.DEBUG:

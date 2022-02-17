@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -6,6 +8,9 @@ from app1.models import *
 
 
 # Create your views here.
+
+def index(request):
+    return render(request, "home/index.html", {"title":"Explore Bikes"})
 
 # Headers
 
@@ -34,6 +39,24 @@ def public(request):
     return render(request, "header/public.html", {"title": "Public"})
 
 
+################################################# Home #################################################
+
+def admin_home(request):
+    return render(request, 'home/admin.html', {"title": "Admin Home"})
+
+
+def customer_home(request):
+    return render(request, 'home/customer.html', {"title": "Customer Home"})
+
+
+def sales_home(request):
+    return render(request, 'home/sales.html', {"title": "Sales Home"})
+
+
+def service_home(request):
+    return render(request, 'home/service.html', {"title": "Service Home"})
+
+
 # Forms
 
 # Admin -> Staff Management -> Appointment
@@ -44,15 +67,17 @@ def appointment(request):
 def appoint(request):
     if request.method == "POST":
         data = tbl_staff()
-        data.Staffid = request.POST.get('staffid')
+        data.staffID = "na"
         data.Name = request.POST.get('name')
         data.Address = request.POST.get('address')
         data.Phone = request.POST.get('phone')
         data.Email = request.POST.get('email')
         data.category = request.POST.get('category')
         data.save()
+        data.staffID = "EBS" + data.category + str(data.id)
+        data.save()
         data1 = tbl_login()
-        data1.userid = data.Staffid
+        data1.userid = data.staffID
         data1.password = request.POST.get('phone')
         data1.category = request.POST.get('category')
         data1.save()
@@ -111,10 +136,10 @@ def new_service(request):
 def add_new_service(request):
     if request.method == "POST":
         data = tbl_service()
-        data.serviceid = "na"
+        data.serviceID = "na"
         data.servicename = request.POST.get('servicename')
         data.save()
-        data.serviceid = "SRV" + str(data.id)
+        data.serviceID = "SRV" + str(data.id)
         data.save()
     return render(request, "forms/new_service.html", {"title": "New Service"})
 
@@ -127,11 +152,13 @@ def give_review(request):
 def new_give_review(request):
     if request.method == "POST":
         data = tbl_reviews()
-        data.reviewid = request.POST.get('reviewid')
-        data.customerName = request.POST.get('customername')
+        data.reviewID = "na"
+        data.customerID = "na"
         data.review = request.POST.get('review')
-        data.reviewdate = request.POST.get('reviewdate')
+        data.reviewdate = datetime.datetime.now().strftime("%Y-%m-%d")
         data.save()
+        data.customerID = request.session['uid']
+        data.reviewID = "EBReview" + str(data.id)
         return render(request, "forms/give_review.html", {"title": "Give Review"})
 
 
@@ -143,10 +170,12 @@ def give_complaint(request):
 def new_give_complaint(request):
     if request.method == "POST":
         data = tbl_complaints()
-        data.complaintid = request.POST.get('complaintid')
-        data.customerName = request.POST.get('customername')
+        data.complaintID = "na"
+        data.customerID = request.session['uid']
         data.complaint = request.POST.get('complaint')
-        data.complaintDate = request.POST.get('complaintdate')
+        data.complaintDate = datetime.datetime.now().strftime("%Y-%m-%d")
+        data.save()
+        data.complaintID = "EBComplaint" + str(data.id)
         data.save()
         return render(request, "forms/give_complaint.html", {"title": "Give Complaint"})
 
@@ -159,12 +188,14 @@ def register(request):
 def new_register(request):
     if request.method == "POST":
         data = tbl_customer()
-        data.Customerid = "EBC" + str(data.id)
+        data.Customerid = "na"
         data.Name = request.POST.get('name')
         data.Address = request.POST.get('address')
         data.Phone = request.POST.get('phone')
         data.Email = request.POST.get('email')
         data.Password = request.POST.get('password')
+        data.save()
+        data.Customerid = "EBC" + str(data.id)
         data.save()
         data1 = tbl_login()
         data1.userid = "EBC" + str(data.id)
@@ -197,6 +228,26 @@ def change_service(request, id):
     data.servicename = request.POST.get('servicename')
     data.save()
     return redirect('/remove_service')
+
+
+def book_service(request):
+    data = tbl_service.objects.all().order_by('servicename')
+    return render(request, 'booking/book_service.html', {"title": "book_service", "data": data})
+
+
+
+# def book_vehicle_now(request, id):
+#     veh_data = tbl_vehicle_model.objects.get(id=id)
+#     data = tbl_booking()
+#     data.vehicle_model_number = veh_data.name
+#     data.customer_id = request.session['uid']
+#     data.booking_id = "na"
+#     data.booking_date = datetime.datetime.now().strftime("%Y-%m-%d")
+#     data.status = "pending"
+#     data.save()
+#     data.booking_id = "booking" + str(data.id)
+#     data.save()
+#     return redirect('/customer_home')
 
 
 ##############
@@ -294,6 +345,25 @@ def change_vehicle(request, id):
     return redirect('/remove_vehicle')
 
 
+def book_vehicle(request, id):
+    data = tbl_vehicle_model.objects.get(id=id)
+    return render(request, 'booking/book_vehicle.html', {"title": "book_vehicle", "data": data})
+
+
+def book_vehicle_now(request, id):
+    veh_data = tbl_vehicle_model.objects.get(id=id)
+    data = tbl_booking()
+    data.vehicle_model_number = veh_data.name
+    data.customer_id = request.session['uid']
+    data.booking_id = "na"
+    data.booking_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    data.status = "pending"
+    data.save()
+    data.booking_id = "booking" + str(data.id)
+    data.save()
+    return redirect('/customer_home')
+
+
 # Login page
 def login(request):
     return render(request, 'forms/login.html')
@@ -324,28 +394,12 @@ def log(request):
             return HttpResponse("Invalid user")
 
 
-################################################# Home #################################################
-
-def admin_home(request):
-    return render(request, 'home/admin.html', {"title": "Admin Home"})
-
-
-def customer_home(request):
-    return render(request, 'home/customer.html', {"title": "Customer Home"})
-
-
-def sales_home(request):
-    return render(request, 'home/sales.html', {"title": "Sales Home"})
-
-
-def service_home(request):
-    return render(request, 'home/service.html', {"title": "Service Home"})
-
-
+###########
+# Customer -> View Model
 def view_model_page(request):
     data = tbl_vehicle_model.objects.all()
     return render(request, 'customer/view_model.html', {"title": "view_model_page", "models": data})
 
-def book_vehicle(request,id):
-    data = tbl_vehicle_model.objects.get(id=id)
-    return render(request, 'forms/book_vehicle.html', {"title":"book_vehicle", "data":data})
+
+def customer_logout(request):
+    return redirect("/login")
