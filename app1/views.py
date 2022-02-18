@@ -8,10 +8,15 @@ from app1.models import *
 
 
 # Create your views here.
-
+# Public Home - Index html part
 def index(request):
-    return render(request, "home/index.html", {"title": "Explore Bikes"})
-
+    return render(request, "public/index.html", {"title": "Explore Bikes"})
+def view_services_public(request):
+    pass
+def view_reviews_public(request):
+    pass
+def view_vehicles_public(request):
+    pass
 
 # Headers
 

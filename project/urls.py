@@ -22,13 +22,17 @@ from app1 import views
 urlpatterns = [
 
     path('', views.index),
+    path('public', views.index),
+    path('view_services_public', views.view_services_public),
+    path('view_reviews_public', views.view_reviews_public),
+    path('view_vehicles_public', views.view_vehicles_public),
 
     ################################################# HEADER #################################################
 
     path('admin/', views.admin),
     path('sales/', views.sales),
     path('service/', views.service),
-    path('public/', views.public),
+    path('public_header/', views.public),
     path('customer/', views.customer),
 
     ################################################# STAFF #################################################
