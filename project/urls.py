@@ -122,6 +122,10 @@ urlpatterns = [
     path('vehicle_booking_accept/<int:id>', views.vehicle_booking_accept),
     path('vehicle_booking_reject/<int:id>', views.vehicle_booking_reject),
 
+    path('view_booking_service/', views.view_booking_service),
+    path('service_accept/<int:id>', views.service_accept),
+    path('service_reject/<int:id>', views.service_reject),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

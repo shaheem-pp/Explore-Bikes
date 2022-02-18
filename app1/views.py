@@ -424,14 +424,35 @@ def view_booking_sales(request):
     data = tbl_booking.objects.all().filter(status="pending")
     return render(request, "sales/view_booking_sales.html", {"data": data})
 
-def vehicle_booking_accept(request,id):
+
+def vehicle_booking_accept(request, id):
     data = tbl_booking.objects.get(id=id)
-    data.status="accepted"
+    data.status = "accepted"
     data.save()
     return redirect('/view_booking_sales')
 
-def vehicle_booking_reject(request,id):
+
+def vehicle_booking_reject(request, id):
     data = tbl_booking.objects.get(id=id)
-    data.status="rejected"
+    data.status = "rejected"
     data.save()
     return redirect('/view_booking_sales')
+
+
+def view_booking_service(request):
+    data = tbl_book_service.objects.all().filter(status="pending")
+    return render(request, "service/view_booking_service.html", {"data": data})
+
+
+def service_accept(request, id):
+    data = tbl_book_service.objects.get(id=id)
+    data.status = "accepted"
+    data.save()
+    return redirect('/view_booking_service')
+
+
+def service_reject(request, id):
+    data = tbl_book_service.objects.get(id=id)
+    data.status = "rejected"
+    data.save()
+    return redirect('/view_booking_service')
