@@ -429,6 +429,11 @@ def vehicle_booking_accept(request, id):
     data = tbl_booking.objects.get(id=id)
     data.status = "accepted"
     data.save()
+    data_sales = tbl_sales()
+    data_sales.vehicle_number = data.vehicle_model_number
+    data_sales.customerID = data.customer_id
+    data_sales.sales_no = "EBSalesNo" + str(data_sales.id)
+    data_sales.save()
     return redirect('/view_booking_sales')
 
 

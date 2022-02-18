@@ -47,7 +47,6 @@ class tbl_sales(models.Model):
     sales_no = models.CharField(max_length=30)
     customerID = models.CharField(max_length=30)
     vehicle_number = models.CharField(max_length=30)
-    model_no = models.CharField(max_length=30)
 
 
 class tbl_spare_parts(models.Model):
