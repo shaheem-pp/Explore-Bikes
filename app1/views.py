@@ -396,7 +396,7 @@ def log(request):
                 request.session['uid'] = un
                 flag = 1
                 if type == "admin":
-                    return redirect('/admin_home ')
+                    return redirect('/admin_home')
                 elif type == "Customer":
                     return redirect('/customer_home')
                 elif type == "Sales":
