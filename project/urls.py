@@ -21,11 +21,13 @@ from app1 import views
 
 urlpatterns = [
 
+    ################################################# Public #################################################
+
     path('', views.index),
     path('public', views.index),
-    path('view_services_public', views.view_services_public),
-    path('view_reviews_public', views.view_reviews_public),
-    path('view_vehicles_public', views.view_vehicles_public),
+    path('view_services_public/', views.view_services_public),
+    path('view_reviews_public/', views.view_reviews_public),
+    path('view_vehicles_public/', views.view_vehicles_public),
 
     ################################################# HEADER #################################################
 
@@ -112,8 +114,14 @@ urlpatterns = [
     path('book_service/', views.book_service),
     path('book_service_now/<int:id>', views.book_service_now),
 
-    path('customer_logout/', views.customer_logout)
-]
+    path('customer_logout/', views.customer_logout),
 
+    ################################################# Sales #################################################
+
+    path('view_booking_sales/', views.view_booking_sales),
+    path('vehicle_booking_accept/<int:id>', views.vehicle_booking_accept),
+    path('vehicle_booking_reject/<int:id>', views.vehicle_booking_reject),
+
+]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

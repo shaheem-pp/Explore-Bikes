@@ -1,0 +1,11 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+    {% include "header/public.html" %}
+
+    <div class="m-5">
+        {% for services in datas %}
+            <h1 class="display-4 text-left">{{ services.servicename }}</h1>
+        {% endfor %}
+    </div>
+
+{% endblock %}

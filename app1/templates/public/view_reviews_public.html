@@ -1,0 +1,22 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+    {% include "header/public.html" %}
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Review</th>
+            <th scope="col">Date</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for data in datas %}
+            <tr>
+                <td>{{ data.review }}</td>
+                <td>{{ data.reviewdate }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

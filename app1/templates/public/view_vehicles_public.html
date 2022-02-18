@@ -1,0 +1,24 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+    {% include "header/public.html" %}
+    <div class="row">
+        {% for model in datas %}
+            <div class="card col-md-6 p-2">
+                <img class="card-img-top" src="{{ model.photo }}" alt="Bike image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ model.name }}</h5>
+                    <p class="card-text">
+                        Model Number: {{ model.vehiclemodelnumber }}<br>
+                        Engine Capacity: {{ model.enginecapacity }}<br>
+                        Bike CC: {{ model.cc }}<br>
+                        Tank Capacity: {{ model.tankcapacity }}<br>
+                        Mileage: {{ model.mileage }}<br>
+                        Colour: {{ model.colour }}<br>
+                        Price: {{ model.price }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

@@ -11,12 +11,22 @@ from app1.models import *
 # Public Home - Index html part
 def index(request):
     return render(request, "public/index.html", {"title": "Explore Bikes"})
+
+
 def view_services_public(request):
-    pass
+    data = tbl_service.objects.all()
+    return render(request, "public/view_services_public.html", {"title": "View Service", "datas": data})
+
+
 def view_reviews_public(request):
-    pass
+    data = tbl_reviews.objects.all()
+    return render(request, "public/view_reviews_public.html", {"title": "View Review", "datas": data})
+
+
 def view_vehicles_public(request):
-    pass
+    data = tbl_vehicle_model.objects.all()
+    return render(request, "public/view_vehicles_public.html", {"title": "View Vehicles", "datas": data})
+
 
 # Headers
 
@@ -408,3 +418,20 @@ def view_model_page(request):
 
 def customer_logout(request):
     return redirect("/login")
+
+
+def view_booking_sales(request):
+    data = tbl_booking.objects.all().filter(status="pending")
+    return render(request, "sales/view_booking_sales.html", {"data": data})
+
+def vehicle_booking_accept(request,id):
+    data = tbl_booking.objects.get(id=id)
+    data.status="accepted"
+    data.save()
+    return redirect('/view_booking_sales')
+
+def vehicle_booking_reject(request,id):
+    data = tbl_booking.objects.get(id=id)
+    data.status="rejected"
+    data.save()
+    return redirect('/view_booking_sales')
