@@ -3,33 +3,45 @@ from django.db import models
 
 # Create your models here.
 
+class tbl_customer(models.Model):
+    Customerid = models.CharField(max_length=10)
+    Name = models.CharField(max_length=40)
+    Address = models.CharField(max_length=40)
+    Phone = models.CharField(max_length=10)
+    Email = models.CharField(max_length=20)
+    Password = models.CharField(max_length=20)
+    status = models.CharField(max_length=10)
+
+    class Meta:
+        db_table = "tbl_customer"
+
+
+class tbl_vehicle_model(models.Model):
+    vehicle_model_number = models.CharField(max_length=10)
+    name = models.CharField(max_length=10)
+    engine_capacity = models.CharField(max_length=10)
+    photo = models.CharField(max_length=100)
+    cc = models.CharField(max_length=10)
+    tank_capacity = models.CharField(max_length=10)
+    mileage = models.CharField(max_length=10)
+    colour = models.CharField(max_length=15)
+    price = models.CharField(max_length=10)
+
+    class meta:
+        db_table = "tbl_vehicle_model"
+
 
 class tbl_staff(models.Model):
-    staffID = models.CharField(max_length=30)
-    Name = models.CharField(max_length=40)
+    staffID = models.CharField(max_length=10)
+    Name = models.CharField(max_length=20)
     Address = models.CharField(max_length=30)
-    Phone = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
-    Status = models.CharField(max_length=30)
+    Phone = models.CharField(max_length=10)
+    Email = models.CharField(max_length=20)
+    Status = models.CharField(max_length=10)
     category = models.CharField(max_length=15, default="Nil")
 
     class Meta:
         db_table = "tbl_staff"
-
-
-class tbl_vehicle_model(models.Model):
-    vehiclemodelnumber = models.CharField(max_length=30)
-    name = models.CharField(max_length=30)
-    enginecapacity = models.CharField(max_length=40)
-    photo = models.CharField(max_length=100)
-    cc = models.CharField(max_length=40)
-    tankcapacity = models.CharField(max_length=30)
-    mileage = models.CharField(max_length=40)
-    colour = models.CharField(max_length=30)
-    price = models.CharField(max_length=40)
-
-    class meta:
-        db_table = "tbl_vehicle_model"
 
 
 class tbl_booking(models.Model):
@@ -102,19 +114,6 @@ class tbl_complaints(models.Model):
         db_table = "tbl_complaints"
 
 
-class tbl_customer(models.Model):
-    Customerid = models.CharField(max_length=30)
-    Name = models.CharField(max_length=40)
-    Address = models.CharField(max_length=30)
-    Phone = models.CharField(max_length=30)
-    Email = models.CharField(max_length=30)
-    Password = models.CharField(max_length=20)
-    status = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = "tbl_customer"
-
-
 class tbl_login(models.Model):
     userid = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
@@ -123,3 +122,19 @@ class tbl_login(models.Model):
 
     class Meta:
         db_table = "tbl_login"
+
+
+class tbl_bill(models.Model):
+    bill_no = models.CharField(max_length=30)
+    sales_no = models.CharField(max_length=30)
+    bill_date = models.CharField(max_length=30)
+    customer_name = models.CharField(max_length=30)
+    advance = models.CharField(max_length=30)
+    vehicle_model_no = models.CharField(max_length=30)
+    vehicle_name = models.CharField(max_length=30)
+    price = models.CharField(max_length=30)
+    net_amount = models.CharField(max_length=30)
+    payment_mode = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = "tbl_bill"

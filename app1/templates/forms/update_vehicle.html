@@ -5,15 +5,15 @@
         {% csrf_token %}
         <div class="form-group">
             <label for="modelnumber">Vehicle Model Number</label>
-            <input type="text" class="form-control" id="modelnumber" name="modelnumber" value="{{ data.vehiclemodelnumber }}">
+            <input type="text" class="form-control" id="modelnumber" name="modelnumber" value="{{ data.vehicle_model_number }}">
         </div>
         <div class="form-group">
             <label for="name">Model Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ data.name }}">
         </div>
         <div class="form-group">
-            <label for="enginecapacity">Engine Capacity</label>
-            <input type="text" class="form-control" id="enginecapacity" name="enginecapacity" value="{{ data.enginecapacity }}">
+            <label for="engine_capacity">Engine Capacity</label>
+            <input type="text" class="form-control" id="engine_capacity" name="engine_capacity" value="{{ data.engine_capacity }}">
         </div>
         <div class="form-group">
             <label for="photo">Photo</label>
@@ -24,8 +24,9 @@
             <input type="text" class="form-control" id="cc" name="cc" value="{{ data.cc }}">
         </div>
         <div class="form-group">
-            <label for="tankcapacity">Tank Capacity</label>
-            <input type="text" class="form-control" id="tankcapacity" name="tankcapacity" value="{{ data.tankcapacity }}">
+            <label for="tank_capacity">Tank Capacity</label>
+            <input type="text" class="form-control" id="tankcapacity" name="tank_capacity" value=
+                    "{{ data.tank_capacity }}">
         </div>
         <div class="form-group">
             <label for="mileage">Mileage</label>

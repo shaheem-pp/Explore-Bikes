@@ -108,16 +108,16 @@ def new_model(request):
 def add_new_model(request):
     if request.method == "POST":
         data = tbl_vehicle_model()
-        data.vehiclemodelnumber = request.POST.get('modelnumber')
+        data.vehicle_model_number = request.POST.get('modelnumber')
         data.name = request.POST.get('name')
-        data.enginecapacity = request.POST.get('enginecapacity')
+        data.engine_capacity = request.POST.get('engine_capacity')
         Photo = request.FILES['photo']
         fs = FileSystemStorage()
         filename = fs.save(Photo.name, Photo)
         uploaded_file_url = fs.url(filename)
         data.photo = uploaded_file_url
         data.cc = request.POST.get('cc')
-        data.tankcapacity = request.POST.get('tankcapacity')
+        data.tank_capacity = request.POST.get('tank_capacity')
         data.mileage = request.POST.get('mileage')
         data.colour = request.POST.get('colour')
         data.price = request.POST.get('price')
@@ -262,6 +262,7 @@ def book_service_now(request, id):
     data.serviceDate = datetime.datetime.now().strftime("%Y-%m-%d")
     data.save()
     data.serviceID = "EBService" + str(data.id)
+    data.save()
     return redirect('/book_service')
 
 
@@ -347,12 +348,12 @@ def update_vehicle(request, id):
 
 def change_vehicle(request, id):
     data = tbl_vehicle_model.objects.get(id=id)
-    data.vehiclemodelnumber = request.POST.get('modelnumber')
+    data.vehicle_model_number = request.POST.get('modelnumber')
     data.name = request.POST.get('name')
-    data.enginecapacity = request.POST.get('enginecapacity')
+    data.engine_capacity = request.POST.get('engine_capacity')
     data.photo = request.POST.get('photo')
     data.cc = request.POST.get('cc')
-    data.tankcapacity = request.POST.get('tankcapacity')
+    data.tank_capacity = request.POST.get('tank_capacity')
     data.mileage = request.POST.get('mileage')
     data.colour = request.POST.get('colour')
     data.price = request.POST.get('price')
