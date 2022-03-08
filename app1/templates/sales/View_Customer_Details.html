@@ -1,0 +1,40 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+    {% include "header/sales.html" %}
+    <div class="m-5">
+    <table>
+        <tr>
+            <td>Customer ID</td>
+            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+            <td>{{ d.Customerid }}</td>
+        </tr>
+        <tr>
+            <td>Customer Name</td>
+            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+            <td>{{ d.Name }}</td>
+        </tr>
+        <tr>
+            <td>Customer Address</td>
+            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+            <td>{{ d.Address }}</td>
+        </tr>
+        <tr>
+            <td>Phone Number</td>
+            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+            <td>{{ d.Phone }}</td>
+        </tr>
+        <tr>
+            <td>Customer Email</td>
+            <td>&nbsp;&nbsp;:&nbsp;&nbsp;</td>
+            <td>{{ d.Email }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <a href="/update_sales_status/">
+                    <button class="btn btn-block btn-outline-secondary my-2">Go Back</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+    </div>
+{% endblock %}

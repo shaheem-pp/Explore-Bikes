@@ -62,7 +62,9 @@ def admin_home(request):
 
 
 def customer_home(request):
-    return render(request, 'home/customer.html', {"title": "Customer Home"})
+    uid = request.session['uid']
+    user = tbl_customer.objects.get(Customerid=uid)
+    return render(request, 'home/customer.html', {"title": "Customer Home", 'user': user})
 
 
 def sales_home(request):
@@ -110,14 +112,14 @@ def add_new_model(request):
         data = tbl_vehicle_model()
         data.vehicle_model_number = request.POST.get('modelnumber')
         data.name = request.POST.get('name')
-        data.engine_capacity = request.POST.get('engine_capacity')
+        data.engine_capacity = request.POST.get('enginecapacity')
         Photo = request.FILES['photo']
         fs = FileSystemStorage()
         filename = fs.save(Photo.name, Photo)
         uploaded_file_url = fs.url(filename)
         data.photo = uploaded_file_url
         data.cc = request.POST.get('cc')
-        data.tank_capacity = request.POST.get('tank_capacity')
+        data.tank_capacity = request.POST.get('tankcapacity')
         data.mileage = request.POST.get('mileage')
         data.colour = request.POST.get('colour')
         data.price = request.POST.get('price')
@@ -462,3 +464,30 @@ def service_reject(request, id):
     data.status = "rejected"
     data.save()
     return redirect('/view_booking_service')
+
+
+# def update_sales_status(request):
+#     data = tbl_booking.objects.all().filter(status="accepted")
+#     return render(request, "sales/update_sales_status.html", {"data": data})
+#
+#
+# def View_Customer_Details(request, customer_id):
+#     data = tbl_customer.objects.get(Customerid=customer_id)
+#     return render(request, "sales/View_Customer_Details.html", {"d": data})
+#
+#
+# def sales_update_accept(request, id):
+#     data = tbl_booking.objects.get(id=id)
+#     data1 = tbl_sales()
+#     data1.sales_no = "salesEB" + str(id)
+#     data1.customerID = data.customer_id
+#     data1.vehicle_number = data.vehicle_model_number
+#     data.status = "Completed"
+#     data1.save()
+#     data.save()
+#     return redirect('/update_sales_status')
+
+def view_customer_service_status(request):
+    uid = request.session['uid']
+    data = tbl_book_service.objects.filter(customerID=uid)
+    return render(request, "customer/view_customer_service_status.html", {"data": data})

@@ -5,10 +5,10 @@ from django.db import models
 
 class tbl_customer(models.Model):
     Customerid = models.CharField(max_length=10)
-    Name = models.CharField(max_length=40)
-    Address = models.CharField(max_length=40)
+    Name = models.CharField(max_length=15)
+    Address = models.CharField(max_length=30)
     Phone = models.CharField(max_length=10)
-    Email = models.CharField(max_length=20)
+    Email = models.EmailField(max_length=20)
     Password = models.CharField(max_length=20)
     status = models.CharField(max_length=10)
 
@@ -59,6 +59,9 @@ class tbl_sales(models.Model):
     sales_no = models.CharField(max_length=30)
     customerID = models.CharField(max_length=30)
     vehicle_number = models.CharField(max_length=30)
+
+    class meta:
+        db_table = "tbl_sales"
 
 
 class tbl_spare_parts(models.Model):

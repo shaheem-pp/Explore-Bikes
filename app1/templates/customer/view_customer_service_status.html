@@ -1,0 +1,22 @@
+{% extends "header/customer.html" %}
+{% block body %}
+
+    <div class="m-5">
+        <table>
+            {% for data in data %}
+                <tr>
+                    <td><h1 class="display-4">{{ data.serviceName }}</h1></td>
+                    <td><h1 class="display-4">&nbsp;&nbsp;:&nbsp;&nbsp;</h1></td>
+                    {% if data.status == "accepted" %}
+                        <td class="text-success"><h1 class="display-4">{{ data.status }}</h1></td>
+                    {% elif data.status == "pending" %}
+                        <td class="text-warning"><h1 class="display-4">{{ data.status }}</h1></td>
+                    {% else %}
+                        <td class="text-danger"><h1 class="display-4">{{ data.status }}</h1></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock body %}

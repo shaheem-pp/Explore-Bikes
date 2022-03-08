@@ -126,6 +126,12 @@ urlpatterns = [
     path('service_accept/<int:id>', views.service_accept),
     path('service_reject/<int:id>', views.service_reject),
 
+    # path('update_sales_status/', views.update_sales_status),
+    # path('View_Customer_Details/<str:customer_id>', views.View_Customer_Details),
+    # path('sales_update_accept/<int:id>', views.sales_update_accept),
+
+    path('view_customer_service_status/', views.view_customer_service_status)
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
