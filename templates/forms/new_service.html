@@ -1,0 +1,116 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+
+{#{% include "header/header.html" %}#}
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/admin_home/">Admin</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/admin_home/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        Staff Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/appointment">Appointment</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_staff">Change Role</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_staff">Remove Staff</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        Vehicle Master
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/new_model">New Model</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_vehicle">Change Price</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_vehicle">Remove Vehicle</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        Spare Parts Master Admin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/add_part">Add Parts</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_price">Update Price</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_price">Remove Price</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        Service Master
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/new_service">New Service</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_service">Update Service</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/remove_service">Remove Service</a>
+                    </div>
+                </li>
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"#}
+{#                       aria-expanded="false">#}
+{#                        Reports#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="#">Stock Report</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Booking Details</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Order Details</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Pending Orders</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Sales Reports</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">Service Details</a>#}
+{#                    </div>#}
+{#                </li>#}
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"#}
+{#                       aria-expanded="false">#}
+{#                        Views#}
+{#                    </a>#}
+{#                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
+{#                        <a class="dropdown-item" href="#">View Complaints</a>#}
+{#                        <div class="dropdown-divider"></div>#}
+{#                        <a class="dropdown-item" href="#">View Reviews</a>#}
+{#                    </div>#}
+{#                </li>#}
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1 class="display-1 text-center p-5">New Service</h1>
+    <form action="/add_new_service/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="servicename">Service Type</label>
+            <input id="servicename" name="servicename" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit
+        </button>
+    </form>
+
+{% endblock %}

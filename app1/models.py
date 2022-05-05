@@ -1,15 +1,16 @@
-from django.db import models
 
+from django.db import models
+from django.db.models.base import Model
 
 # Create your models here.
 
 class tbl_customer(models.Model):
-    Customerid = models.CharField(max_length=10)
+    Customerid = models.CharField(max_length=60)
     Name = models.CharField(max_length=15)
     Address = models.CharField(max_length=30)
     Phone = models.CharField(max_length=10)
     Email = models.EmailField(max_length=20)
-    Password = models.CharField(max_length=20)
+    Password = models.CharField(max_length=60)
     status = models.CharField(max_length=10)
 
     class Meta:
@@ -118,8 +119,8 @@ class tbl_complaints(models.Model):
 
 
 class tbl_login(models.Model):
-    userid = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
+    userid = models.CharField(max_length=60)
+    password = models.CharField(max_length=60)
     category = models.CharField(max_length=30)
     hint = models.CharField(max_length=30)
 

@@ -1,0 +1,27 @@
+{% extends "base/BS_Base.html" %}
+{% block content %}
+{% include "header/service.html" %}
+<br><br><br><br>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Service ID</th>
+            <th scope="col">Service Name</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services %}
+            <tr>
+                <td>{{ service.serviceID }}</td>
+                <td>{{ service.servicename }}</td>
+                <td><a href="/remove_service_functions/{{ service.id }}">Remove</a></td>
+                <td><a href="/update_service/{{ service.id }}">Update</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

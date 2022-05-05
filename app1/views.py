@@ -5,10 +5,74 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from app1.models import *
-
+from tkinter import *
+import webbrowser
 
 # Create your views here.
 # Public Home - Index html part
+
+def chatbot2(request):
+    root = Tk()
+    root.title("Chatbot")
+    def send():
+        send = "You -> "+e.get()
+        txt.insert(END, "\n"+send)
+        user = e.get().lower()
+        if(user == "hello"):
+            txt.insert(END, "\n" + "Bot -> Hi")
+        elif(user == "hi" or user == "hii" or user == "hiiii"):
+            txt.insert(END, "\n" + "Bot -> Hello")
+        elif(e.get() == "how are you"):
+            txt.insert(END, "\n" + "Bot -> fine! and you")
+        elif(user == "fine" or user == "i am good" or user == "i am doing good"):
+            txt.insert(END, "\n" + "Bot -> Great! how can I help you.")
+        else:
+            txt.insert(END, "\n" + "Bot -> Sorry! I dind't got you")
+        e.delete(0, END)
+    txt = Text(root)
+    txt.grid(row=0, column=0, columnspan=2)
+    e = Entry(root, width=100)
+    e.grid(row=1, column=0)
+    send = Button(root, text="Send", command=send).grid(row=1, column=1)
+  
+
+
+
+
+
+    
+    
+
+    def open():
+        webbrowser.open("http://127.0.0.1:8000/register")
+
+    def open2():
+        webbrowser.open("http://127.0.0.1:8000/login")
+    def open3():
+        webbrowser.open("http://127.0.0.1:8000/view_vehicles_public")
+    def open4():
+        webbrowser.open("http://127.0.0.1:8000/view_reviews_public")
+    
+
+    btn1 = Button(root, text = 'REGISTRATION', width = '10', command = open)
+
+    btn2 = Button(root, text = 'LOGIN', width = '15', command = open2)
+    btn3 = Button(root, text = 'VEHICLES', width = '10', command = open3)
+    btn4 = Button(root, text = 'REVIEWS', width = '5', command = open4)
+    btn1.place(x=400,y=30)
+    btn2.place(x=500,y=30)
+    btn3.place(x=300,y=30)
+    btn4.place(x=200,y=30)
+    root.mainloop()
+
+
+
+
+
+
+
+    return render(request,"public/index.html")
+
 def index(request):
     return render(request, "public/index.html", {"title": "Explore Bikes"})
 
@@ -95,7 +159,7 @@ def appoint(request):
         data.staffID = "EBS" + data.category + str(data.id)
         data.save()
         data1 = tbl_login()
-        data1.userid = data.staffID
+        data1.userid = request.POST.get('email')
         data1.password = request.POST.get('phone')
         data1.category = request.POST.get('category')
         data1.save()
@@ -213,10 +277,10 @@ def new_register(request):
         data.Email = request.POST.get('email')
         data.Password = request.POST.get('password')
         data.save()
-        data.Customerid = "EBC" + str(data.id)
+        data.Customerid = request.POST.get('email')
         data.save()
         data1 = tbl_login()
-        data1.userid = "EBC" + str(data.id)
+        data1.userid = request.POST.get('email')
         data1.password = request.POST.get('password')
         data1.category = "Customer"
         data1.save()
@@ -466,28 +530,31 @@ def service_reject(request, id):
     return redirect('/view_booking_service')
 
 
-# def update_sales_status(request):
-#     data = tbl_booking.objects.all().filter(status="accepted")
-#     return render(request, "sales/update_sales_status.html", {"data": data})
-#
-#
-# def View_Customer_Details(request, customer_id):
-#     data = tbl_customer.objects.get(Customerid=customer_id)
-#     return render(request, "sales/View_Customer_Details.html", {"d": data})
-#
-#
-# def sales_update_accept(request, id):
-#     data = tbl_booking.objects.get(id=id)
-#     data1 = tbl_sales()
-#     data1.sales_no = "salesEB" + str(id)
-#     data1.customerID = data.customer_id
-#     data1.vehicle_number = data.vehicle_model_number
-#     data.status = "Completed"
-#     data1.save()
-#     data.save()
-#     return redirect('/update_sales_status')
+def update_sales_status(request):
+    data = tbl_booking.objects.all().filter(status="accepted")
+    return render(request, "sales/update_sales_status.html", {"data": data})
+
+
+def View_Customer_Details(request, customer_id):
+    data = tbl_customer.objects.get(Customerid=customer_id)
+    return render(request, "sales/View_Customer_Details.html", {"d": data})
+
+
+def sales_update_accept(request, id):
+    data = tbl_booking.objects.get(id=id)
+    data1 = tbl_sales()
+    data1.sales_no = "salesEB" + str(id)
+    data1.customerID = data.customer_id
+    data1.vehicle_number = data.vehicle_model_number
+    data.status = "Completed"
+    data1.save()
+    data.save()
+    return redirect('/update_sales_status')
 
 def view_customer_service_status(request):
     uid = request.session['uid']
     data = tbl_book_service.objects.filter(customerID=uid)
     return render(request, "customer/view_customer_service_status.html", {"data": data})
+def logout(request):
+    del request.session['uid']
+    return render(request,"public/index.html")    
